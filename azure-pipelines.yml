@@ -17,29 +17,26 @@ steps:
 - task: TerraformInstaller@0
   displayName: install Terraform v0.12.28
   inputs:
-    terraformVersion: '0.12.28'
+    terraformVersion: '0.12.3'
 
 - task: TerraformTaskV1@0
   displayName: terraform init
   inputs:
     provider: 'azurerm'
     command: 'init'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
-    backendServiceArm: '$(subscription)'
-    backendAzureRmResourceGroupName: '$(resourceGroup)'
-    backendAzureRmStorageAccountName: '$(storageAccount)'
-    backendAzureRmContainerName: '$(container)'
-    backendAzureRmKey: '$(tfstateFile)'
+    backendServiceArm: 'Azure for Students(4611a1e2-ae94-487b-9e82-82b4f4a87155)'
+    backendAzureRmResourceGroupName: 'tamopstf'
+    backendAzureRmStorageAccountName: 'mynewstoragexyz'
+    backendAzureRmContainerName: 'tfstatedevops'
+    backendAzureRmKey: '7nPk3tugljur2ow9PPmgYyYRh7UN4ZkRf/xF+tToCIptr5VvXmacBU1tKWAvXTyDcQjnaBMUyCowZZiNQwQnbw=='
 
 - task: TerraformTaskV1@0
   displayName: terraform plan -out=tfplan
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
-    commandOptions: '-out=tfplan'
-    # commandOptions: '-detailed-exitcode -out=tfplan'
-    environmentServiceNameAzureRM: '$(subscription)'
+    commandOptions: 'out=tfplan'
+    environmentServiceNameAzureRM: 'Azure for Students(4611a1e2-ae94-487b-9e82-82b4f4a87155)'
 
 - task: PowerShell@2
   displayName: detect any terraform change
@@ -67,6 +64,4 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'apply'
-    workingDirectory: '$(System.DefaultWorkingDirectory)/skip-step'
-    commandOptions: 'tfplan'
-    environmentServiceNameAzureRM: '$(subscription)'
+    environmentServiceNameAzureRM: 'Azure for Students(4611a1e2-ae94-487b-9e82-82b4f4a87155)'
