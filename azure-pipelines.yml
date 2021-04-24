@@ -35,7 +35,6 @@ steps:
   inputs:
     provider: 'azurerm'
     command: 'plan'
-    commandOptions: 'out=tfplan'
     environmentServiceNameAzureRM: 'Azure for Students(4611a1e2-ae94-487b-9e82-82b4f4a87155)'
 
 - task: PowerShell@2
